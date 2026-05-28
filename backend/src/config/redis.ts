@@ -1,7 +1,9 @@
-import IORedis from 'ioredis';
+import RedisPackage from 'ioredis';
 import { env } from './env.js';
 
-export const redisConnection = new IORedis({
+const RedisClient = RedisPackage as any;
+
+export const redisConnection = new RedisClient({
   host: env.redisHost,
   port: env.redisPort,
   maxRetriesPerRequest: null
