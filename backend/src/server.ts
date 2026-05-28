@@ -13,11 +13,11 @@ async function bootstrap() {
   const server = http.createServer(app);
   initSocket(server);
 
-  const subscriber = new RedisClient({
-    host: env.redisHost,
-    port: env.redisPort
-  });
-
+const subscriber = new RedisClient({
+  host: env.redisHost,
+  port: env.redisPort,
+  password: process.env.REDIS_PASSWORD
+});
   await subscriber.subscribe('assignment-events');
 
   subscriber.on('message', (_channel: string, message: string) => {
